@@ -4,11 +4,12 @@ import motif.Creatable;
 import motif.Expose;
 import motif.NoDependencies;
 
-import javax.inject.Named;
-
 @SuppressWarnings("NullableProblems")
 @motif.Scope
-public interface ScopeA extends Creatable<NoDependencies>, ScopeCreatableChild.Dependencies {
+public interface ScopeA extends
+        Creatable<NoDependencies>,
+        // The line below allows [ScopeCreatableChild] to be created via [ScopeFactory]
+        ScopeCreatableChild.Dependencies {
 
     @ActivityContext Context activityContext();
 
@@ -17,6 +18,7 @@ public interface ScopeA extends Creatable<NoDependencies>, ScopeCreatableChild.D
 
     ScopeChild scopeChild();
 
+    // The line below allows [ScopeCreatableChild] to be created via a traditional child method
     ScopeCreatableChild scopeCreatableChild();
 
     @motif.Objects
